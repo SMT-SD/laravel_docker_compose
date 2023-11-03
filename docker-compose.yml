@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: ./project
-      dockerfile: ./docker/php_dev/Dockerfile 
+      dockerfile: ./docker/php/Dockerfile 
     container_name: ${APP_NAME}_app
     restart: unless-stopped
     environment:
