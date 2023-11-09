@@ -3,7 +3,6 @@ FROM php:8.1-fpm
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         supervisor \
-        nginx \
         libz-dev \
         libpq-dev \
         libjpeg-dev \
@@ -34,15 +33,18 @@ ENV COMPOSER_VERSION 2.5.4
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION
 
 
-COPY . .
+COPY ./project .
 
-COPY docker/conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./conf/ /conf
 
-COPY ./docker/conf/laravel.ini /usr/local/etc/php/conf.d/laravel.ini
+COPY ./php /php
 
+RUN mv /conf/laravel.ini /usr/local/etc/php/conf.d/laravel.ini \
+    && mv /conf/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN chmod -R 755 ./storage \
     && chmod -R 755 ./bootstrap/cache
 
+RUN chown -R www-data:www-data .
 
-ENTRYPOINT ["bash","./php/entrypoint.sh"]
+ENTRYPOINT ["bash","/php/entrypoint.sh"]

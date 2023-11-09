@@ -1,5 +1,5 @@
 #!/bin/sh
-bash /var/www//html/docker/php_dev/one_time_run.sh 
+bash /php/one_time_run.sh 
 echo "Running supervisor"
 /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
 
