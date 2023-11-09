@@ -14,7 +14,7 @@ services:
     depends_on:
       - db
     ports:
-    - "8002:80"
+    - "8002:8000"
 
 # uncomment this lines if you want to use postgresql instead of mysql
   # db:
