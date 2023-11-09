@@ -45,4 +45,4 @@ RUN chmod -R 755 ./storage \
     && chmod -R 755 ./bootstrap/cache
 
 
-ENTRYPOINT ["bash","./docker/php_dev/entrypoint.sh"]
+ENTRYPOINT ["bash","./php/entrypoint.sh"]
